@@ -52,6 +52,10 @@ const createItemSchema = z.object({
     .default(''),
 });
 
+const updateItemSchema = createItemSchema.partial().extend({
+  assetId: createItemSchema.shape.assetId.optional(),
+});
+
 // 3. Person / Borrower Schemas
 const createPersonSchema = z.object({
   name: z
@@ -112,6 +116,7 @@ const returnItemSchema = z.object({
 module.exports = {
   loginSchema,
   createItemSchema,
+  updateItemSchema,
   createPersonSchema,
   issueItemSchema,
   returnItemSchema,

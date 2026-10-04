@@ -185,6 +185,54 @@ const createItem = async (req, res, next) => {
   }
 };
 
+const updateItem = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const updates = { ...req.body };
+    if (updates.assetId) updates.assetId = updates.assetId.toUpperCase();
+
+    if (updates.category) {
+      const category = await Category.findById(updates.category);
+      if (!category) {
+        const error = new Error(`Category with ID ${updates.category} does not exist.`);
+        error.statusCode = 404;
+        return next(error);
+      }
+    }
+
+    if (updates.assetId) {
+      const duplicate = await Item.findOne({ assetId: updates.assetId, _id: { $ne: id } });
+      if (duplicate) {
+        const error = new Error(`An equipment item with Asset ID "${updates.assetId}" already exists.`);
+        error.statusCode = 409;
+        return next(error);
+      }
+    }
+
+    const item = await Item.findByIdAndUpdate(id, updates, { new: true, runValidators: true })
+      .populate('category', 'name');
+    if (!item) {
+      const error = new Error(`Equipment item with ID ${id} not found.`);
+      error.statusCode = 404;
+      return next(error);
+    }
+
+    await AuditLog.create({
+      performedBy: req.user._id,
+      action: 'ITEM_UPDATED',
+      targetEntity: 'Item',
+      targetId: item._id,
+      details: { assetId: item.assetId, name: item.name },
+      ipAddress: req.ip || '127.0.0.1',
+      status: 'SUCCESS',
+    });
+
+    res.status(200).json({ success: true, message: `Equipment item "${item.name}" updated successfully.`, item });
+  } catch (error) {
+    next(error);
+  }
+};
+
 /**
  * Get all categories (helper for frontend dropdowns)
  * GET /api/v1/items/categories
@@ -205,5 +253,6 @@ module.exports = {
   getItems,
   getItemById,
   createItem,
+  updateItem,
   getCategories,
 };

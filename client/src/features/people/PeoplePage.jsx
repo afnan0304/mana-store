@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardHeader, CardTitle, CardContent } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
 import { Badge } from '../../components/ui/Badge';
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell, TableEmpty } from '../../components/ui/Table';
 import { getPeople } from '../../services/storeService';
+import RegisterBorrowerModal from './RegisterBorrowerModal';
 import { UserPlus, Search, RefreshCw, Mail, Phone } from 'lucide-react';
 
 export const PeoplePage = () => {
+  const navigate = useNavigate();
   const [people, setPeople] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [typeFilter, setTypeFilter] = useState('');
+  const [registerOpen, setRegisterOpen] = useState(false);
 
   useEffect(() => {
     fetchPeople();
@@ -56,7 +60,7 @@ export const PeoplePage = () => {
           >
             Refresh
           </Button>
-          <Button size="sm" variant="primary" leftIcon={<UserPlus className="h-4 w-4" />}>
+          <Button size="sm" variant="primary" onClick={() => setRegisterOpen(true)} leftIcon={<UserPlus className="h-4 w-4" />}>
             Register Borrower
           </Button>
         </div>
@@ -118,7 +122,7 @@ export const PeoplePage = () => {
                 <TableEmpty message="No borrowers found matching criteria." colSpan={7} />
               ) : (
                 people.map((person) => (
-                  <TableRow key={person._id}>
+                  <TableRow key={person._id} onClick={() => navigate(`/people/${person._id}`)} className="cursor-pointer hover:bg-slate-50">
                     {/* Monospace Identifier */}
                     <TableCell>
                       <span className="font-mono tracking-tight text-xs font-semibold text-slate-900 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
@@ -176,6 +180,12 @@ export const PeoplePage = () => {
           </Table>
         </CardContent>
       </Card>
+
+      <RegisterBorrowerModal
+        isOpen={registerOpen}
+        onClose={() => setRegisterOpen(false)}
+        onSuccess={() => fetchPeople()}
+      />
     </div>
   );
 };

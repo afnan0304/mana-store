@@ -22,6 +22,10 @@ export const createItem = async (itemData) => {
   return await api.post('/items', itemData);
 };
 
+export const updateItem = async (id, itemData) => {
+  return await api.put(`/items/${id}`, itemData);
+};
+
 export const getCategories = async () => {
   return await api.get('/items/categories');
 };
@@ -86,6 +90,7 @@ export default {
   getItems,
   getItemById,
   createItem,
+  updateItem,
   getCategories,
   getPeople,
   getPersonById,

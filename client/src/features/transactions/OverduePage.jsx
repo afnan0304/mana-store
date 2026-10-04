@@ -5,13 +5,14 @@ import { Badge } from '../../components/ui/Badge';
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell, TableEmpty } from '../../components/ui/Table';
 import { getOverdueItems } from '../../services/storeService';
 import ReturnModal from './ReturnModal';
-import { ClockAlert, ArrowDownLeft, Mail, Phone, RefreshCw } from 'lucide-react';
+import { ClockAlert, ArrowDownLeft, Mail, RefreshCw, CheckCircle2 } from 'lucide-react';
 
 export const OverduePage = () => {
   const [overdues, setOverdues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [returnModalOpen, setReturnModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [reminderStatus, setReminderStatus] = useState('');
 
   useEffect(() => {
     fetchOverdues();
@@ -32,6 +33,24 @@ export const OverduePage = () => {
   const handleReturnClick = (item) => {
     setSelectedItem(item);
     setReturnModalOpen(true);
+  };
+
+  const handleSendReminders = () => {
+    const recipients = overdues
+      .map((item) => item.currentBorrower?.email)
+      .filter(Boolean);
+
+    if (recipients.length === 0) {
+      setReminderStatus('No borrower email addresses are available for the current overdue items.');
+      return;
+    }
+
+    const subject = encodeURIComponent('Northline equipment return reminder');
+    const body = encodeURIComponent(
+      'Hello,\n\nThis is a reminder that equipment issued from Northline is overdue. Please contact the store desk to arrange its return.\n\nThank you.'
+    );
+    window.location.href = `mailto:?bcc=${encodeURIComponent(recipients.join(','))}&subject=${subject}&body=${body}`;
+    setReminderStatus(`Reminder draft prepared for ${recipients.length} borrower${recipients.length === 1 ? '' : 's'}.`);
   };
 
   return (
@@ -57,12 +76,21 @@ export const OverduePage = () => {
           <Button
             variant="danger"
             size="sm"
+            onClick={handleSendReminders}
+            disabled={overdues.length === 0}
             leftIcon={<Mail className="h-4 w-4" />}
           >
             Send Overdue Reminders
           </Button>
         </div>
       </div>
+
+      {reminderStatus && (
+        <div className="flex items-center gap-2 rounded-lg border border-teal-200 bg-teal-50 p-3 text-xs text-teal-800">
+          <CheckCircle2 className="h-4 w-4 shrink-0" />
+          {reminderStatus}
+        </div>
+      )}
 
       {/* Main Table Card */}
       <Card className="border border-rose-200">

@@ -13,6 +13,7 @@ import {
   ArrowDownLeft,
   History,
   RefreshCw,
+  Plus,
 } from 'lucide-react';
 
 export const InventoryListPage = () => {
@@ -142,6 +143,14 @@ export const InventoryListPage = () => {
             leftIcon={<RefreshCw className="h-3.5 w-3.5" />}
           >
             Refresh
+          </Button>
+          <Button
+            size="sm"
+            variant="primary"
+            onClick={() => navigate('/items/new')}
+            leftIcon={<Plus className="h-4 w-4" />}
+          >
+            Add Item
           </Button>
           <Button
             size="sm"

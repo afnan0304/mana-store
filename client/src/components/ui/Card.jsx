@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Card = ({ children, className = '', ...props }) => (
   <div
-    className={`bg-white rounded-xl border border-slate-200/80 shadow-sm overflow-hidden ${className}`}
+    className={`bg-white rounded-lg border border-slate-200/80 shadow-sm overflow-hidden ${className}`}
     {...props}
   >
     {children}

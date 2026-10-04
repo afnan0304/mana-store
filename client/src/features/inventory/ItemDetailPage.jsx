@@ -154,6 +154,13 @@ export const ItemDetailPage = () => {
               Process Return
             </Button>
           )}
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => navigate(`/items/${item._id}/edit`)}
+          >
+            Edit item
+          </Button>
         </div>
       </div>
 

@@ -1,18 +1,18 @@
 import React from 'react';
 
 const variants = {
-  primary: 'bg-indigo-600 text-white hover:bg-indigo-700 focus:ring-indigo-500 shadow-sm shadow-indigo-600/20 active:bg-indigo-800',
+  primary: 'bg-teal-700 text-white hover:bg-teal-800 focus:ring-teal-600 active:bg-teal-900',
   secondary: 'bg-slate-900 text-white hover:bg-slate-800 focus:ring-slate-700 shadow-sm active:bg-black',
   outline: 'border border-slate-300 text-slate-700 hover:bg-slate-50 hover:text-slate-900 focus:ring-slate-400 bg-white shadow-xs',
   danger: 'bg-rose-600 text-white hover:bg-rose-700 focus:ring-rose-500 shadow-sm shadow-rose-600/20 active:bg-rose-800',
   ghost: 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus:ring-slate-400',
-  brand: 'bg-indigo-600 text-white hover:bg-indigo-700 focus:ring-indigo-500 shadow-sm shadow-indigo-600/20',
+  brand: 'bg-teal-700 text-white hover:bg-teal-800 focus:ring-teal-600',
 };
 
 const sizes = {
   sm: 'px-3 py-1.5 text-xs font-medium rounded-lg gap-1.5',
   md: 'px-4 py-2 text-sm font-medium rounded-lg gap-2',
-  lg: 'px-5 py-2.5 text-base font-semibold rounded-xl gap-2.5',
+  lg: 'px-5 py-2.5 text-base font-semibold rounded-lg gap-2.5',
 };
 
 export const Button = ({

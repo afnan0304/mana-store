@@ -34,14 +34,14 @@ export const Modal = ({
     <div className="fixed inset-0 z-50 overflow-y-auto">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm transition-opacity"
+        className="fixed inset-0 bg-slate-900/50 transition-opacity"
         onClick={onClose}
       />
 
       {/* Modal Dialog */}
       <div className="flex min-h-full items-center justify-center p-4 text-center">
         <div
-          className={`w-full ${maxWidth} transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-2xl transition-all border border-slate-200`}
+          className={`w-full ${maxWidth} transform overflow-hidden rounded-lg bg-white text-left align-middle shadow-lg transition-all border border-slate-200`}
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}

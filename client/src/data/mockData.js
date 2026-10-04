@@ -51,9 +51,9 @@ export const avgLoanDuration = [
 ];
 
 export const mockUsers = [
-  { id: 'u1', username: 'admin', email: 'admin@mana.store', role: 'ADMIN', isActive: true, lastLogin: '2 min ago' },
-  { id: 'u2', username: 'storekeeper', email: 'storekeeper@mana.store', role: 'STOREKEEPER', isActive: true, lastLogin: '1 hr ago' },
-  { id: 'u3', username: 'r.nair', email: 'r.nair@mana.store', role: 'STOREKEEPER', isActive: true, lastLogin: 'Yesterday' },
-  { id: 'u4', username: 'a.khan', email: 'a.khan@mana.store', role: 'VIEWER', isActive: true, lastLogin: '3 days ago' },
-  { id: 'u5', username: 'j.thomas', email: 'j.thomas@mana.store', role: 'VIEWER', isActive: false, lastLogin: '41 days ago' },
+  { id: 'u1', username: 'admin', email: 'admin@northline.store', role: 'ADMIN', isActive: true, lastLogin: '2 min ago' },
+  { id: 'u2', username: 'storekeeper', email: 'storekeeper@northline.store', role: 'STOREKEEPER', isActive: true, lastLogin: '1 hr ago' },
+  { id: 'u3', username: 'r.nair', email: 'r.nair@northline.store', role: 'STOREKEEPER', isActive: true, lastLogin: 'Yesterday' },
+  { id: 'u4', username: 'a.khan', email: 'a.khan@northline.store', role: 'VIEWER', isActive: true, lastLogin: '3 days ago' },
+  { id: 'u5', username: 'j.thomas', email: 'j.thomas@northline.store', role: 'VIEWER', isActive: false, lastLogin: '41 days ago' },
 ];

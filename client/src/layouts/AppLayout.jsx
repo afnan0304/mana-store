@@ -17,7 +17,6 @@ import {
   Bell,
   Search,
   Store,
-  ChevronRight,
   LogOut,
 } from 'lucide-react';
 
@@ -50,33 +49,33 @@ export const AppLayout = () => {
       item.to === '/dashboard'
         ? location.pathname === '/' || location.pathname === '/dashboard'
         : location.pathname.startsWith(item.to)
-    ) || { name: 'Store Management' };
+    ) || { name: 'Northline' };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex font-sans antialiased text-slate-900">
+    <div className="min-h-screen bg-[#f4f6f3] flex antialiased text-slate-900">
       {/* Mobile Sidebar Overlay */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 z-40 bg-slate-950/60 backdrop-blur-sm lg:hidden transition-opacity"
+          className="fixed inset-0 z-40 bg-slate-950/60 lg:hidden transition-opacity"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
-      {/* Sidebar Navigation - Slate + Deep Navy Base */}
+      {/* Sidebar Navigation */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-slate-300 transform transition-transform duration-200 ease-in-out lg:translate-x-0 lg:static lg:inset-auto flex flex-col border-r border-slate-800 ${
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-[#172523] text-slate-300 transform transition-transform duration-200 ease-in-out lg:translate-x-0 lg:static lg:inset-auto flex flex-col border-r border-[#314542] ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         {/* Brand Header */}
-        <div className="h-16 px-6 flex items-center justify-between border-b border-slate-800/80">
+        <div className="h-16 px-5 flex items-center justify-between border-b border-[#314542]">
           <div className="flex items-center gap-3">
-            <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-indigo-400 flex items-center justify-center text-white shadow-md shadow-indigo-950/50">
+            <div className="h-9 w-9 rounded-lg bg-amber-400 flex items-center justify-center text-slate-950">
               <Store className="h-5 w-5" />
             </div>
             <div>
               <span className="font-bold text-white text-base tracking-tight block">
-                MANA STORE
+                NORTHLINE
               </span>
               <span className="text-[10px] uppercase font-semibold text-slate-400 tracking-wider">
                 Equipment Hub
@@ -123,9 +122,7 @@ export const AppLayout = () => {
                         <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30">
                           {item.badge}
                         </span>
-                      ) : (
-                        isActive && <ChevronRight className="h-3.5 w-3.5 text-white/80" />
-                      )}
+                      ) : null}
                     </>
                   )}
                 </NavLink>
@@ -135,9 +132,9 @@ export const AppLayout = () => {
         </nav>
 
         {/* Sidebar Footer User Info */}
-        <div className="p-3 m-3 border-t border-slate-800/80 rounded-xl bg-slate-950/40 flex items-center justify-between">
+        <div className="p-3 m-3 border-t border-[#314542] rounded-md bg-[#10201e] flex items-center justify-between">
           <div className="flex items-center gap-2.5 overflow-hidden">
-            <div className="h-8 w-8 rounded-full bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 font-bold text-xs flex items-center justify-center shrink-0">
+            <div className="h-8 w-8 rounded-md bg-amber-400 text-slate-950 font-bold text-xs flex items-center justify-center shrink-0">
               {user?.username ? user.username.slice(0, 2).toUpperCase() : 'US'}
             </div>
             <div className="truncate">
@@ -162,7 +159,7 @@ export const AppLayout = () => {
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Topbar */}
-        <header className="h-16 bg-white border-b border-slate-200 sticky top-0 z-30 flex items-center justify-between px-4 sm:px-6 lg:px-8 shadow-xs">
+        <header className="h-16 bg-[#fbfcfa] border-b border-slate-200 sticky top-0 z-30 flex items-center justify-between px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3">
             <button
               onClick={() => setSidebarOpen(true)}
@@ -182,7 +179,7 @@ export const AppLayout = () => {
               <input
                 type="text"
                 placeholder="Search inventory, tags..."
-                className="w-full pl-9 pr-4 py-1.5 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:bg-white text-slate-800 placeholder-slate-400 transition-colors"
+                className="w-full pl-9 pr-4 py-1.5 text-sm bg-white border border-slate-300 rounded-md focus:outline-none focus:ring-1 focus:ring-teal-600 focus:border-teal-600 text-slate-800 placeholder-slate-400 transition-colors"
               />
             </div>
 
@@ -197,7 +194,7 @@ export const AppLayout = () => {
 
             {/* User Profile Pill */}
             <div className="flex items-center gap-2.5 pl-3 border-l border-slate-200">
-              <div className="h-8 w-8 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 font-semibold text-xs flex items-center justify-center">
+              <div className="h-8 w-8 rounded-md bg-teal-100 border border-teal-200 text-teal-800 font-semibold text-xs flex items-center justify-center">
                 {user?.username ? user.username.slice(0, 2).toUpperCase() : 'AD'}
               </div>
               <div className="hidden lg:block text-left text-xs">

@@ -3,11 +3,12 @@ const {
   getItems,
   getItemById,
   createItem,
+  updateItem,
   getCategories,
 } = require('../controllers/itemController');
 const { authenticate, requireRoles } = require('../middleware/auth');
 const { validate } = require('../middleware/validate');
-const { createItemSchema } = require('../validators');
+const { createItemSchema, updateItemSchema } = require('../validators');
 
 const router = express.Router();
 
@@ -29,6 +30,13 @@ router.post(
   requireRoles('ADMIN', 'STOREKEEPER'),
   validate(createItemSchema),
   createItem
+);
+
+router.put(
+  '/:id',
+  requireRoles('ADMIN', 'STOREKEEPER'),
+  validate(updateItemSchema),
+  updateItem
 );
 
 module.exports = router;
